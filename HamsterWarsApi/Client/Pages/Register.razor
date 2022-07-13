@@ -1,0 +1,44 @@
+﻿@page "/register"
+@inject IHamsterService _hamsterService
+@inject NavigationManager _navigationManager
+
+
+<h3 class="mb-4">Hamster Register</h3>
+
+<EditForm Model="@hamster" OnValidSubmit="@AddHamster">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div>
+        <label class="mb-0" for="name"><b>Name</b></label>
+        <InputText id="name" @bind-Value="hamster.Name" class="mb-2 form-control" style="width:500px"></InputText>
+    </div>
+    <div>
+        <label class="mb-0" for="age"><b>Age</b></label>
+        <InputNumber id="age" @bind-Value="hamster.Age" class="mb-2 form-control" style="width:500px"></InputNumber>
+    </div>
+    <div>
+        <label class="mb-0" for="fav-food"><b>Favourite Food</b></label>
+        <InputText id="fav-food" @bind-Value="hamster.FavFood" class="mb-2 form-control" style="width:500px"></InputText>
+    </div>
+    <div>
+        <label class="mb-0" for="loves"><b>Loves</b></label>
+        <InputText id="loves" @bind-Value="hamster.Loves" class="mb-2 form-control" style="width:500px"></InputText>
+    </div>
+    <div>
+        <label class="mb-0" for="image"><b>Image</b></label>
+        <InputText id="image" @bind-Value="hamster.ImgName" class="form-control" style="width:500px"></InputText>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Add Hamster</button>
+</EditForm>
+
+
+@code {
+    Hamster hamster = new Hamster();
+
+    private async Task AddHamster()
+    {
+        await _hamsterService.AddHamster(hamster);
+        _navigationManager.NavigateTo("/gallery");
+    }
+}

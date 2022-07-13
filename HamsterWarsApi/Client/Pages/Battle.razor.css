@@ -1,0 +1,15 @@
+﻿.hamster-battle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: blue;
+}
+
+.hamster-result {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    background-color: gold;
+}

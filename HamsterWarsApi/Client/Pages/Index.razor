@@ -1,0 +1,19 @@
+﻿@page "/"
+@inject NavigationManager _navigationManager
+
+
+<h1 class="text-center">Welcome to Hamster Wars</h1>
+<br />
+<h3 class="text-center">Choose the cutest hamster</h3> 
+<br />
+
+<div class="text-center">
+    <button type="button" class="btn btn-primary btn-lg" @onclick="(() => GoToGallery())">Go to Gallery</button>
+    <button type="button" class="btn btn-warning btn-lg" @onclick="(() => GoToBattle())">Go to Battle</button>
+</div>
+
+
+@code {
+    void GoToGallery() => _navigationManager.NavigateTo("/gallery");
+    void GoToBattle() => _navigationManager.NavigateTo("/battle");
+}

@@ -1,0 +1,42 @@
+﻿@page "/hamsterinfo/{id:int}"
+@inherits HamsterInfoBase
+@inject NavigationManager _navigationManager
+
+<h2 class="mb-4 text-center">Hamster Info</h2>
+
+@if (HamsterService is null)
+{
+    <h3><em>Loading Hamsters...</em></h3>
+}
+else
+{
+    <div class="hamster-info">
+        <div class="col-md-3 mb-2">
+            <div class="card" style="width: 22rem;">
+                <img class="img-thumbnail" src="@hamster.ImgName">
+                <div class="card-body">
+                    <h4 class="card-title mb-3 text-center">
+                        <b>@hamster.Name</b>
+                    </h4>
+                    <p class="card-text"><b>Age:</b>  <b>@hamster.Age</b></p>
+                    <p class="card-text"><b>Favourite Food:</b>  <b>@hamster.FavFood</b></p>
+                    <p class="card-text"><b>Favourite thing:</b> <b>@hamster.Loves</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary btn-lg" @onclick="(() => GoToGallery())">Go back to Gallery</button>
+        <button type="button" class="btn btn-danger btn-lg" @onclick="(() => DeleteHamster(Id))">Delete @hamster.Name</button>
+    </div>
+}
+
+@code {
+    void GoToGallery() => _navigationManager.NavigateTo("/gallery");
+     
+    public async Task DeleteHamster(int id)
+    {
+        await HamsterService.DeleteHamster(hamster.Id);
+        _navigationManager.NavigateTo("/gallery");
+    }
+}

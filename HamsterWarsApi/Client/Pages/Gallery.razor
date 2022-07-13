@@ -1,0 +1,53 @@
+﻿@page "/gallery"
+@inherits GalleryBase
+@inject NavigationManager _navigationManager
+
+@if (Hamsters is null)
+{
+    <h3><em>Loading Hamsters...</em></h3>
+}
+else
+{
+    <h1 class="mb-4 text-center">Hamster Gallery</h1>
+
+    <div class="text-center">
+        <button type="button" class="btn btn-primary btn-lg" @onclick="(() => GoToRegister())">Add Hamster</button>
+    </div>
+
+    var hamsterCount = Hamsters.Count();
+
+    @if (hamsterCount > 0)
+    {
+        const int hamstersPerRow = 4;
+        var hamsterRowList = new List<Hamster>();
+
+        @for (int i = 0; i < hamsterCount; i++)
+        {
+            hamsterRowList = Hamsters.Skip(i * hamstersPerRow).Take(hamstersPerRow).ToList();
+
+            <div class="row mt-5">
+
+                @foreach (var hamster in hamsterRowList)
+                {
+                    <div class="col-md-3 mb-2">
+                        <a @onclick="(() => GoToHamsterInfo(hamster.Id))">
+                            <div class="card" style="width: 22rem;">
+                                <img class="img-thumbnail" src="@hamster.ImgName">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-3">
+                                        <b>@hamster.Name</b>
+                                    </h4>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                }
+            </div>
+        }
+    }
+}
+
+@code {
+    void GoToHamsterInfo(int id) => _navigationManager.NavigateTo($"hamsterinfo/{id}");
+    void GoToRegister() => _navigationManager.NavigateTo($"register");
+}

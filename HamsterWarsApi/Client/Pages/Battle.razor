@@ -1,0 +1,83 @@
+﻿@page "/battle"
+@inherits BattleBase
+
+<h3 class="text-center">Battle of the Century</h3>
+<h4 class="text-center">Choose the cutest hamster</h4>
+
+
+@if (HamsterContenders is null)
+{
+    <h3><em>Loading Hamsters...</em></h3>
+}
+else
+{
+    <div class="hamster-battle">
+        <div class="col-md-3 mb-2">
+            <a @onclick="(() => UpdateBattle(Contender1, Contender2))">
+                <div class="card text-center" style="width: 22rem;">
+                    <img class="img-thumbnail" src="@Contender1.ImgName">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3">
+                            <b>@Contender1.Name</b>
+                        </h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3 mb-2">
+            <a @onclick="(() => UpdateBattle(Contender2, Contender1))">
+                <div class="card text-center" style="width: 22rem;">
+                    <img class="img-thumbnail" src="@Contender2.ImgName">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3">
+                            <b>@Contender2.Name</b>
+                        </h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+}
+<hr />
+
+@if (OldContender1 is not null && OldContender2 is not null)
+{
+    <div class="hamster-result">
+        <div class="col-md-3 mb-2">
+            <div class="card" style="width: 22rem;">
+                <h3 class="text-center"><b>Winner</b></h3>
+                <img class="img-thumbnail" src="@OldContender1.ImgName">
+                
+                <div class="card-body">
+                    <h4 class="card-title mb-3 text-center">
+                        <b>@OldContender1.Name</b>
+                    </h4>
+                    <p class="card-text"><b>Wins:</b>  <b>@OldContender1.Wins</b></p>
+                    <p class="card-text"><b>Losses:</b>  <b>@OldContender1.Losses</b></p>
+                    <p class="card-text"><b>Games:</b> <b>@OldContender1.Games</b></p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-2">
+            <div class="card" style="width: 22rem;">
+                <h3 class="text-center"><b>Loser</b></h3>
+                <img class="img-thumbnail" src="@OldContender2.ImgName"> 
+                <div class="card-body">
+                    <h4 class="card-title mb-3 text-center">
+                        <b>@OldContender2.Name</b>
+                    </h4>
+                    <p class="card-text"><b>Wins:</b>  <b>@OldContender2.Wins</b></p>
+                    <p class="card-text"><b>Losses:</b>  <b>@OldContender2.Losses</b></p>
+                    <p class="card-text"><b>Games:</b> <b>@OldContender2.Games</b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
